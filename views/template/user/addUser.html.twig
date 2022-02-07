@@ -1,0 +1,33 @@
+{% extends "../../main.html.twig" %}
+{% block main %}
+	<div class="container">
+		<div
+			class="row">
+			                                                                                                      <!--_id === -->
+			<form class="col-md-6 mx-auto mt-5" method="post" action="{% if action == "/updateUser" %}{{action}}/{{user._id}}{% else %}{{action}}{% endif %}">
+				<h1>Inscription</h1>
+				<div>
+					<label for="name">Nom</label>
+					<input type="text" class="form-control" id="name" name="name" placeholder="Entrer un nom" value="{{user.name}}">
+				</div>
+				<div>
+					<label for="firstname">prénom</label>
+					<input type="text" class="form-control" id="firstname" name="firstname" placeholder="entrée votre prénom" value="{{user.firstname}}">
+				</div>
+				<div>
+					<label for="pseudo">pseudonyme</label>
+					<input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="entrée votre pseudonyme" value="{{user.pseudo}}">
+				</div>
+				<div>
+					<label for="email">Email</label>
+					<input type="email" class="form-control" id="email" name="email" placeholder="votre email" value="{{user.mail}}">
+				</div>
+				<div>
+					<label for="password">pasword</label>
+					<input type="password" class="form-control" id="password" name="password" placeholder="mot de passe" value="{{user.pasword}}">
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}

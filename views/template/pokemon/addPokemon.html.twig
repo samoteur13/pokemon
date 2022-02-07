@@ -1,0 +1,47 @@
+{% extends "../../main.html.twig" %}
+{% block main %}
+	{{pokemon._id}}
+	<div class="container">
+		<div
+			class="row">
+			<!--_id === -->
+
+			<form class="col-md-6 mx-auto mt-5" method="post" id="grille" action="{% if action == "/updatePokemon" %}{{action}}/{{pokemon._id}} {% elseif action == "/addPokemonUser" %}{{action}}/{{user._id}} {% elseif action == "/updateUserPokemon" %}{{action}}/{{pokemon}} {% else %}{{action}}{% endif %}">
+
+				<h1>Pokédex</h1>
+
+				<div class="d-flex justify-content-center">
+					<div class="d-flex col-2 justify-content-center align-items-center">
+						<p id="points-display"></p>
+					</div>
+					<img src="{{pokemonParams.image}}{{pokemonImage}}" alt="image pokemon">
+					
+				</div>
+				<div class="d-flex justify-content-center">
+					<input id="lvl" name="lvl" type="hidden" value="1{{pokemon.lvl}}">
+					<input id="image" name="image" type="hidden" value="{{pokemonImage}}{{pokemon.image}}">
+				</div>
+				<div>
+					<label for="name">Nom</label>
+					<input type="text" class="form-control " id="name" name="name" placeholder="Entrer un nom" value="{{pokemonName}}{{pokemonParams.name}} " readonly>
+				</div>
+				<div>
+					<label for="attaque">Attaque</label>
+					<input type="number" class="form-control" id="attaque" name="attaque" min="0" placeholder="" value="0{{pokemon.attaque}}">
+				</div>
+				<div>
+					<label for="defense">Défense</label>
+					<input type="number" class="form-control" id="defense" name="defense" min="0" placeholder="" value="0{{pokemon.defense}}">
+				</div>
+				<div>
+					<label for="vitesse">Vitesse</label>
+					<input type="number" class="form-control" id="vitesse" name="vitesse" min="0" placeholder="" value="0{{pokemon.vitesse}}">
+				</div>
+				<button type="submit" id="btnSubmit" class="btn btn-primary" disabled>Submit</button>
+			</form>
+		</div>
+	</div>
+	<script> 
+
+	</script>
+{% endblock %}

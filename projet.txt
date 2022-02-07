@@ -1,0 +1,33 @@
+Projet Pokemon :
+
+	1er niveau : 
+
+		Créer une application CRUD (create,read,update,delete) sur le theme des Pokémon.
+		En d’autre termes, permettre d’ajouter, d’afficher, de modifier,                     		
+                et de supprimer des Pokémons
+		(exactement comme dans l’exemple tuto MongoDB)
+		Vous devrez utiliser MongoDB pour stocker vos Pokémons.
+
+	2em niveau :
+		
+		Rendre possible l’inscription et la connexion d’un dresseur (utilisateur).
+		Les Pokémons qu’il ajoutera lui appartiendront.
+		C’est-à-dire qu’il ne pourra interagir (ajouter, modifier, supprimer) que ses propre Pokémons
+
+	3em niveau :
+
+		Tous les 18 Pokémons ajouter, le dresseur gagnera un badge.
+		(badge roche, badge cascade, badge foudre, badge prisme, badge âme
+		badge marais, badge volcan, badge terre.)
+		Quand le dresseur aura attrapé 151 Pokémon, le dresseur recevra le titre de meilleur dresseur.
+
+
+
+
+
+Soyez créatif. Je suis là pour vous aider si problèmes.
+essayer quand même d’être le plus autonome possible.
+Vous avez Jusqu’à Mardi 1er février pour rendre l’application
+
+
+Bonne chance !  

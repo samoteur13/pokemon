@@ -1,0 +1,93 @@
+{% extends "../../main.html.twig" %}
+<!--etendre le main est affichier ceci dedans -->
+
+{% block main %}
+	<div class="container mt-5">
+		<div
+			class="row">
+			<!--                            ACCEUIL UTILISATEUR     -->
+			{% if action == "/connexionUser" %}
+				<section>
+					<header class="d-flex m-1 justify-content-around align-items-center">
+						<h1>Dresseur
+							{{user.pseudo}}</h1>
+						<a href="/addPokemonUser/{{user.id}}" class="btn btn-primary ">Ajouter un pokémon</a>
+						<a href="/deconexion" class="btn btn-danger ">Déconnexion</a>
+					</header>
+					<div class="card col-md-6">
+						<div class="card-body d-table ">
+							<h5 class="card-title text-center ">Badge</h5>
+							{% for badgeUser in user.badgeUser %}
+								<article class="col-6 ">
+									<image src="{{badgeUser.image}}" alt="">
+									<p>{{badgeUser.name}}</p>
+								</article>
+							{% endfor %}
+						</div>
+					</div>
+					<main>
+						{% for pokemon in user.pokemonUser %}
+							<div class="col-md-4 card mx-auto">
+								<div class="card-body">
+									<h5 class="card-title text-center">{{pokemon.name}}
+									</h5>
+									<img src="{{pokemon.image}}" alt="pokemon">
+									<p class="card-text text-center">Attaque:{{pokemon.attaque}}
+										Défense:{{pokemon.defense}}
+										Vitesse:{{pokemon.vitesse}}</p>
+									<div class="row">
+										<div
+											class="col-md-12 text-center">
+											<!-- pokemon.id === /:id joffrey le Monstre qui consol.log(tout) -->
+											<a href="/updateUserPokemon/{{pokemon._id}}" class="btn btn-primary ">modifer</a>
+											<a href="/deleteUserPokemon/{{pokemon._id}}" class="btn btn-danger ">supprimer</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					{% endfor %}
+				</main>
+			{% endif %}
+		
+			<!--                            ACCEUIL Liste de drésseur     -->
+			{% for user in users %}
+				<div class="col-md-5 m-1 card mx-auto">
+					<div class="card-body">
+						<h5 class="card-title text-center">{{user.pseudo}}
+						</h5>
+						<div class="col-6 d-flex ">
+							<img src="/dresseur.png" alt="pokemon" width="100%">
+							<div class="col-6 d-table">
+								{% for badgeUser in user.badgeUser %}
+									<image class="col-6" src="{{badgeUser.image}}" alt="">
+								{% endfor %}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 overflow-hidden text-center">
+								<div class="d-flex overflow-auto ">
+									{% for pokemon in user.pokemonUser %}
+										<div class="d-flex flex-column   border border-dark rounded m-2">
+											<p class="m-1 fw-bold ">{{pokemon.name}}</p>
+											<div>
+												<img class="m-2" src="{{pokemon.image}}" alt="pokemon" width="50px">
+												<p>Lvl:{{pokemon.lvl}}</p>
+												<p></p>
+											</div>
+										</div>
+
+									{% endfor %}
+
+								</div>
+
+								<a href="/updateUser/{{user.id}}" class="btn btn-primary ">modifer</a>
+								<a href="/deleteUser/{{user.id}}" class="btn btn-danger ">supprimer</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
