@@ -40,7 +40,6 @@ app.listen(8081, () => {
 //-----------------------------------------main page
 app.get('/', async (req, res) => {
     const listUser = await User.find()//
-
     res.render('./template/pokemon/listPokemon.html.twig', {
         users: listUser
     })

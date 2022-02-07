@@ -7,27 +7,30 @@
 			class="row">
 			<!--                            ACCEUIL UTILISATEUR     -->
 			{% if action == "/connexionUser" %}
-				<section>
-					<header class="d-flex m-1 justify-content-around align-items-center">
-						<h1>Dresseur
+				<section class="container-fluid">
+					<header class="text-center ">
+						<h1 class="mb-5">Dresseur
 							{{user.pseudo}}</h1>
-						<a href="/addPokemonUser/{{user.id}}" class="btn btn-primary ">Ajouter un pokémon</a>
-						<a href="/deconexion" class="btn btn-danger ">Déconnexion</a>
+						<article class="d-flex mb-4  justify-content-around align-items-center">
+							<a href="/addPokemonUser/{{user.id}}" class="btn btn-primary ">Ajouter un pokémon</a>
+							<a href="/deconexion" class="btn btn-danger ">Déconnexion</a>
+						</article>
+
 					</header>
-					<div class="card col-md-6">
-						<div class="card-body d-table ">
-							<h5 class="card-title text-center ">Badge</h5>
+					<div class="card">
+						<div class="row d-flex justify-content-around">
+
 							{% for badgeUser in user.badgeUser %}
-								<article class="col-6 ">
+								<article class="col-md-5 text-center p-2">
 									<image src="{{badgeUser.image}}" alt="">
-									<p>{{badgeUser.name}}</p>
+									<p class="m-0">{{badgeUser.name}}</p>
 								</article>
 							{% endfor %}
 						</div>
 					</div>
-					<main>
+					<main class="row">
 						{% for pokemon in user.pokemonUser %}
-							<div class="col-md-4 card mx-auto">
+							<div class="col-md-4 card ">
 								<div class="card-body">
 									<h5 class="card-title text-center">{{pokemon.name}}
 									</h5>
@@ -45,14 +48,14 @@
 									</div>
 								</div>
 							</div>
-						</section>
-					{% endfor %}
+						{% endfor %}
+					</section>
 				</main>
 			{% endif %}
-		
+
 			<!--                            ACCEUIL Liste de drésseur     -->
 			{% for user in users %}
-				<div class="col-md-5 m-1 card mx-auto">
+				<div class="col-md-4 col-sm-10 card mx-auto">
 					<div class="card-body">
 						<h5 class="card-title text-center">{{user.pseudo}}
 						</h5>
