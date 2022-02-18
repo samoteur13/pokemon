@@ -7,16 +7,28 @@
 			</h1>
 		</div>
 	</a>
-	<ul class="nav nav-pills   ">
+	<ul class="nav nav-pills">
+	
+		{% if user.name %}
+			<li class="nav-item">
+				<a href="/deconexion" class=" p-1 p-md-2 btn btn-danger " aria-current="page">Déconnexion</a>
+			</li>
+		{% else %}
+			<li class="nav-item">
+				<a href="/addUser" class="nav-link p-1 p-md-2" aria-current="page">Inscription</a>
+			</li>
+		{% endif %}
+
+		{% if user.name %}
+			<li class="nav-item">
+				<a href="/connexionUser/{{user.id}}" class="nav-link p-1 p-md-2" aria-current="page">compte</a>
+			</li>
+		{% else %}
+			<a href="/connexion" class="nav-link p-1 p-md-2" aria-current="page">Connexion</a>
+		{% endif %}
+
 		<li class="nav-item">
-			<a href="/addUser" class="nav-link" aria-current="page">Inscription</a>
-		</li>
-		{# <li class="nav-item"><a href="/deconexion" class="nav-link" aria-current="page">deconexion</a></li> #}
-		<li class="nav-item">
-			<a href="/connexion" class="nav-link" aria-current="page">Connexion</a>
-		</li>
-		<li class="nav-item">
-			<a href="/" class="nav-link" aria-current="page">Liste de Dresseurs</a>
+			<a href="/" class="nav-link p-1 p-md-2" aria-current="page">Liste de Dresseurs</a>
 		</li>
 	</ul>
 </header>

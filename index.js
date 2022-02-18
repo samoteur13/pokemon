@@ -39,9 +39,16 @@ app.listen(8081, () => {
 
 //-----------------------------------------main page
 app.get('/', async (req, res) => {
+    let user = await User.findOne({ _id: req.session.userId })
+    if (user) {
+        req.session.userId = user._id       ///pourquoi ceci
+    }
+
+    console.log(user)
     const listUser = await User.find()//
     res.render('./template/pokemon/listPokemon.html.twig', {
-        users: listUser
+        users: listUser,
+        user: user
     })
 })
 
@@ -52,7 +59,7 @@ app.get('/addPokemon', async (req, res) => {
     })
 })
 
-//-----------------------------------------modifier un utilisateur
+//-----------------------------------------modifier un utilisateur a finir
 app.get('/updateUser/:id', async (req, res) => {
     const user = await User.findOne({ _id: req.params.id })
     res.render('./template/user/addUser.html.twig', {
@@ -206,10 +213,9 @@ app.post('/updateUserPokemon/:id', async (req, res) => {
 app.get('/deleteUserPokemon/:id', async (req, res) => {
 
     const user = await User.findOne({ _id: req.session.userId }) //pour sauvegarder enssuite sur l'utilisateur
-    let url = req.params.id //recup param du pokemon
-    user.pokemonUser.splice(url, 1) //supprimé l'élèment ciblé
+    const index = user.pokemonUser.findIndex(pokemonUser => pokemonUser._id == req.params.id);//cherche l'index du pokemon 
+    user.pokemonUser.splice(index, 1) //supprimé l'élèment ciblé
     await user.save()
-
     res.redirect('/connexionUser/' + req.session.userId)
 })
 
