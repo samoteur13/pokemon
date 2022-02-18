@@ -40,11 +40,6 @@ app.listen(8081, () => {
 //-----------------------------------------main page
 app.get('/', async (req, res) => {
     let user = await User.findOne({ _id: req.session.userId })
-    if (user) {
-        req.session.userId = user._id       ///pourquoi ceci
-    }
-
-    console.log(user)
     const listUser = await User.find()//
     res.render('./template/pokemon/listPokemon.html.twig', {
         users: listUser,
@@ -52,14 +47,7 @@ app.get('/', async (req, res) => {
     })
 })
 
-
-//-----------------------------------------ajouter un pokemon
-app.get('/addPokemon', async (req, res) => {
-    res.render('./template/pokemon/addPokemon.html.twig', {
-    })
-})
-
-//-----------------------------------------modifier un utilisateur a finir
+//-----------------------------------------modifier un utilisateur a finire
 app.get('/updateUser/:id', async (req, res) => {
     const user = await User.findOne({ _id: req.params.id })
     res.render('./template/user/addUser.html.twig', {
@@ -107,8 +95,9 @@ app.post('/addUser', async (req, res) => {
 app.get('/connexion', async (req, res) => {
 
     res.render('./template/user/connexion.html.twig', {
-
+        messageErreur: req.session.messageErreur
     })
+    req.session.destroy()
 })
 
 app.post('/connexion', async (req, res) => {
@@ -118,8 +107,13 @@ app.post('/connexion', async (req, res) => {
     const user = await User.findOne({ pseudo: req.body.pseudo, password: req.body.password })
     if (user) {
         req.session.userId = user._id
+        req.session.messageErreur = ""
+        res.redirect('/connexionUser/' + req.session.userId)
+    } else {
+        req.session.messageErreur = "Vos informations sont erronés"
+        res.redirect('/connexion')
     }
-    res.redirect('/connexionUser/' + req.session.userId)
+
 })
 
 //------------------------------------------page de connexion pour utilisateur
@@ -149,7 +143,6 @@ app.get('/addPokemonUser/:id', async (req, res) => {
     })
 })
 
-
 app.post('/addPokemonUser/:id', async (req, res) => {
     let user = await User.findOne({ _id: req.params.id })  //rappel de ce qu'il faut
     if (user) {
@@ -157,21 +150,33 @@ app.post('/addPokemonUser/:id', async (req, res) => {
     }
 
     const pokemon = new Pokemon(req.body) //appel un shema de pokémon
-    user.pokemonUser.push(pokemon) //renvoie dans le tableaux le pokémon avec les information
+    await user.pokemonUser.push(pokemon) //renvoie dans le tableaux le pokémon avec les information
 
     let number = 0
     number = user.badgeUser.length
-    res.redirect('/connexionUser/' + req.session.userId)
+
     if (user.badgeUser.length < 8) {
-        if (user.pokemonUser.length % 2 == 0) {
-            if (user.badgeUser.length === 0) {
-                number
-            }
-            user.badgeUser.push(Helper.badgePokemon(number))
+        if (user.badgeUser.length === 0 && user.pokemonUser.length == 2) {
+            await user.badgeUser.push(Helper.badgePokemon(number))
+        } else if (user.badgeUser.length === 1 && user.pokemonUser.length === 2 * 2) {
+            await user.badgeUser.push(Helper.badgePokemon(number))
+        } else if (user.badgeUser.length === 2 && user.pokemonUser.length === 2 * 3) {
+            await user.badgeUser.push(Helper.badgePokemon(number))
+        } else if ( user.badgeUser.length === 3 && user.pokemonUser.length === 2 * 4) {
+            await user.badgeUser.push(Helper.badgePokemon(number))
+        } else if ( user.badgeUser.length === 4 && user.pokemonUser.length === 2 * 5) {
+            await user.badgeUser.push(Helper.badgePokemon(number))
+        } else if (user.badgeUser.length === 5 && user.pokemonUser.length === 2 * 6) {
+            await user.badgeUser.push(Helper.badgePokemon(number))
+        } else if ( user.badgeUser.length === 6 && user.pokemonUser.length === 2 * 7) {
+            await user.badgeUser.push(Helper.badgePokemon(number))
+        } else if (user.badgeUser.length === 7 && user.pokemonUser.length === 2 * 8) {
+            await user.badgeUser.push(Helper.badgePokemon(number))
         }
     }
 
     await user.save() //attend la sauvgarde
+    res.redirect('/connexionUser/' + req.session.userId)
 })
 
 //------------------------------------------modifier un pokemon pour l'utilisateur
@@ -182,8 +187,8 @@ app.get('/updateUserPokemon/:id', async (req, res) => {
     res.render('./template/pokemon/addPokemon.html.twig', {
         action: "/updateUserPokemon",
         user: user,
-        pokemon: req.params.id ,
-        pokemonParams : user.pokemonUser[index]
+        pokemon: req.params.id,
+        pokemonParams: user.pokemonUser[index]
     })
 })
 

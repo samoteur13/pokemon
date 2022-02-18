@@ -8,23 +8,23 @@
 				<h1>Inscription</h1>
 				<div>
 					<label for="name">Nom</label>
-					<input type="text" class="form-control" id="name" name="name" placeholder="Entrer un nom" value="{{user.name}}">
+					<input type="text" class="form-control" id="name" name="name" placeholder="Entrer un nom" value="{{user.name}}" required>
 				</div>
 				<div>
 					<label for="firstname">prénom</label>
-					<input type="text" class="form-control" id="firstname" name="firstname" placeholder="entrée votre prénom" value="{{user.firstname}}">
+					<input type="text" class="form-control" id="firstname" name="firstname" placeholder="entrée votre prénom" value="{{user.firstname}}" required>
 				</div>
 				<div>
 					<label for="pseudo">pseudonyme</label>
-					<input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="entrée votre pseudonyme" value="{{user.pseudo}}">
+					<input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="entrée votre pseudonyme" value="{{user.pseudo}}" required>
 				</div>
 				<div>
 					<label for="email">Email</label>
-					<input type="email" class="form-control" id="email" name="email" placeholder="votre email" value="{{user.mail}}">
+					<input type="email" class="form-control" id="email" name="email" placeholder="votre email" value="{{user.mail}}" required>
 				</div>
 				<div>
 					<label for="password">pasword</label>
-					<input type="password" class="form-control" id="password" name="password" placeholder="mot de passe" value="{{user.pasword}}">
+					<input type="password" class="form-control" id="password" name="password" placeholder="mot de passe" value="{{user.pasword}}" required>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>

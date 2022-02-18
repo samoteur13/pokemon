@@ -17,10 +17,10 @@
 
 					</header>
 					<div class="card">
-						<div class="row d-flex justify-content-around">
+						<div class="row d-flex justify-content-between">
 
 							{% for badgeUser in user.badgeUser %}
-								<article class="col-md-5 text-center p-2">
+								<article class="col-md-3 text-center p-2">
 									<image src="{{badgeUser.image}}" alt="">
 									<p class="m-0">{{badgeUser.name}}</p>
 								</article>
@@ -82,8 +82,7 @@
 									{% endfor %}
 
 								</div>
-
-								<a href="/updateUser/{{user.id}}" class="btn btn-primary ">modifer</a>
+								{# <a href="/updateUser/{{user.id}}" class="btn btn-primary ">modifer</a> #}
 								<a href="/deleteUser/{{user.id}}" class="btn btn-danger ">supprimer</a>
 							</div>
 						</div>
