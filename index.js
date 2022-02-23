@@ -40,7 +40,7 @@ app.listen(8081, () => {
 //-----------------------------------------main page
 app.get('/', async (req, res) => {
     let user = await User.findOne({ _id: req.session.userId })
-    const listUser = await User.find()//
+    const listUser = await User.find()
     res.render('./template/pokemon/listPokemon.html.twig', {
         users: listUser,
         user: user
@@ -80,15 +80,36 @@ app.get('/deleteUser/:id', async (req, res) => {
 
 //-----------------------------------------ajouter un utilisateur
 app.get('/addUser', async (req, res) => {
-    res.render('./template/user/addUser.html.twig', {
 
+
+    res.render('./template/user/addUser.html.twig', {
+        messageErreur: req.session.messageErreur
     })
+    req.session.destroy()
 })
 
 app.post('/addUser', async (req, res) => {
-    const user = new User(req.body)
-    user.save()
-    res.redirect('/connexion')
+    const userEmail = await User.findOne({ email: req.body.email })
+    const userPseudo = await User.findOne({ pseudo: req.body.pseudo })
+
+    req.session.messageErreur = ""
+
+    if (userEmail || userPseudo) {
+        if(userEmail){
+            req.session.messageErreur += "Ces information sont déjà utiliser <br />"
+        }
+        if(userPseudo){
+            req.session.messageErreur += "ce pseudo est déja utiliser <br />"
+        }
+        
+        res.redirect('/addUser')
+    } else {
+        req.session.messageErreur = ""
+        const user = new User(req.body)
+        user.save()
+        res.redirect('/connexion')
+    }
+
 })
 
 //------------------------------------------se connecter un une session
@@ -101,9 +122,7 @@ app.get('/connexion', async (req, res) => {
 })
 
 app.post('/connexion', async (req, res) => {
-    //  if (req.session.userId) {
-    //     res.redirect('connexionUser/' + req.session.userId)
-    // }
+
     const user = await User.findOne({ pseudo: req.body.pseudo, password: req.body.password })
     if (user) {
         req.session.userId = user._id
@@ -162,13 +181,13 @@ app.post('/addPokemonUser/:id', async (req, res) => {
             await user.badgeUser.push(Helper.badgePokemon(number))
         } else if (user.badgeUser.length === 2 && user.pokemonUser.length === 2 * 3) {
             await user.badgeUser.push(Helper.badgePokemon(number))
-        } else if ( user.badgeUser.length === 3 && user.pokemonUser.length === 2 * 4) {
+        } else if (user.badgeUser.length === 3 && user.pokemonUser.length === 2 * 4) {
             await user.badgeUser.push(Helper.badgePokemon(number))
-        } else if ( user.badgeUser.length === 4 && user.pokemonUser.length === 2 * 5) {
+        } else if (user.badgeUser.length === 4 && user.pokemonUser.length === 2 * 5) {
             await user.badgeUser.push(Helper.badgePokemon(number))
         } else if (user.badgeUser.length === 5 && user.pokemonUser.length === 2 * 6) {
             await user.badgeUser.push(Helper.badgePokemon(number))
-        } else if ( user.badgeUser.length === 6 && user.pokemonUser.length === 2 * 7) {
+        } else if (user.badgeUser.length === 6 && user.pokemonUser.length === 2 * 7) {
             await user.badgeUser.push(Helper.badgePokemon(number))
         } else if (user.badgeUser.length === 7 && user.pokemonUser.length === 2 * 8) {
             await user.badgeUser.push(Helper.badgePokemon(number))
