@@ -6,11 +6,12 @@ import Pokemon from './models/modelPokemon.js';
 import User from './models/modelUser.js';
 import session from 'express-session';
 import { Helper } from './helper/helper.js';
+import { Config } from './config.js';
 
 
 
 const app = express();
-const database = "mongodb+srv://samoteur13:022394Samy@cluster0.jwcdd.mongodb.net/pokemon?retryWrites=true&w=majority"
+const database = "mongodb+srv://"+Config.dbUserName+":"+Config.dbPassword+"@"+Config.bdClusterName+"/"+Config.bdNameDatabase+"?retryWrites=true&w=majority"
 
 
 //----------------------------------------connexion mongose
