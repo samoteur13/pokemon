@@ -11,7 +11,7 @@ import { Config } from './config.js';
 
 
 const app = express();
-const database = "mongodb+srv://"+Config.dbUserName+":"+Config.dbPassword+"@"+Config.bdClusterName+"/"+Config.bdNameDatabase+"?retryWrites=true&w=majority"
+const database = "mongodb+srv://" + Config.dbUserName + ":" + Config.dbPassword + "@" + Config.bdClusterName + "/" + Config.bdNameDatabase + "?retryWrites=true&w=majority"
 
 
 //----------------------------------------connexion mongose
@@ -96,13 +96,13 @@ app.post('/addUser', async (req, res) => {
     req.session.messageErreur = ""
 
     if (userEmail || userPseudo) {
-        if(userEmail){
+        if (userEmail) {
             req.session.messageErreur += "Ces information sont déjà utiliser <br />"
         }
-        if(userPseudo){
+        if (userPseudo) {
             req.session.messageErreur += "ce pseudo est déja utiliser <br />"
         }
-        
+
         res.redirect('/addUser')
     } else {
         req.session.messageErreur = ""
