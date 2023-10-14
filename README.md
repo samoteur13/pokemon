@@ -1,4 +1,5 @@
 # Pokemon CRUD Project
+<div align='center'>
 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
@@ -6,6 +7,7 @@
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Boostrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+</div>
 
 This educational project was completed during my training. It is my first CRUD (Create, Read, Update, Delete) application built using Node.js, and it utilizes a NoSQL database, MongoDB. The project involves creating a Pokemon trainer account, adding Pokemon to your collection, earning badges for every +2 Pokemon collected, and using 10 attribute points to enhance your Pokemon's attack, speed, or defense. You can add, remove, or modify a Pokemon's attributes.
 
